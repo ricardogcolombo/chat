@@ -1,0 +1,21 @@
+.chat{
+    padding:10px;
+    .chat-window{
+        border:1px solid black;
+        height:100%;
+        min-height:300px;
+        width:100%;
+        margin:auto
+    }
+    .message-input{
+        font-size:13px;
+        padding:10;
+        width:80%;
+        height:30px;
+        margin:auto;
+    }
+    .send-button{
+        width:19.5%;
+        height:30px;
+    }
+}
