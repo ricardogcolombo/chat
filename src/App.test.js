@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {
+    shallow
+} from 'enzyme';
 
 import {
     Provider
 } from 'react-redux';
 import store from './store.js'
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
+describe('<App/>', () => {
+    const wrapper = shallow(
         <Provider store={store}>
-            <App/>
-        </Provider>, 
-        div);
-});
+                <App/>
+            </Provider>
+    );
+    expect(wrapper.contains('Chat')).toEqual(true)
+
+})

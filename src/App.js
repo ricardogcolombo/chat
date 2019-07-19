@@ -9,31 +9,20 @@ import {
 import './App.scss';
 import Chat from './components/chat/Chat.js'
 
-const initialState = {
-    messages: {}
-}
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = initialState;
-    }
     render() {
         return (
             <div className="App">
             <div>
                 Laura
-                <Chat userid='laura' className='MainChat' />
+                <Chat from='laura' to='rob' className='MainChat' />
             </div>
             <div>
                 Rob
-            <Chat userid='rob'  className='SecondaryChat'/>
+            <Chat from='rob'  to='laura' className='SecondaryChat'/>
             </div>
         </div>
         )
     }
 }
-const mapStateToProps = function(state) {
-    return { };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
