@@ -30,7 +30,8 @@ class Chat extends Component {
             currentMessage,
             from,
             sendMessage,
-            writtingMessage
+            writtingMessage,
+            setIsTyping
         } = this.props;
 
 
@@ -43,7 +44,7 @@ class Chat extends Component {
                     </div>
                     <div className='chat-box'>
                         <TypingMessage to={to} currentMessage={currentMessage}/>
-                        <MessageBox  writtingMessage={writtingMessage} from={from} />
+                        <MessageBox  setIsTyping={setIsTyping} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
                         <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} >send</button>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import {
-    WRITTING_MESSAGE
+    WRITTING_MESSAGE,
+    IS_TYPING
 } from '../actions/messages'
 
 const typingReducer = function(state = {}, action) {
@@ -8,11 +9,18 @@ const typingReducer = function(state = {}, action) {
             return {
                 ...state,
                 [action.from]: {
+                    ...state[action.from],
                     message: action.message,
-                    isTyping: action.isTyping
                 }
             }
-
+        case IS_TYPING:
+            return {
+                ...state,
+                [action.from]: {
+                    ...state[action.from],
+                    isTyping: action.isTyping,
+                }
+            }
         default:
             return state;
     }
