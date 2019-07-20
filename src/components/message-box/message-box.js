@@ -22,7 +22,7 @@ class MessageBox extends React.Component {
         // // set a timeout to delete the typing message
         setTimeout(() => {
             writtingMessage(inputValue, from, false)
-        }, 5000)
+        }, 8000)
     }
     render() {
 
