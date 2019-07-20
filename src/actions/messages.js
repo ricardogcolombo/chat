@@ -2,8 +2,6 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const WRITTING_MESSAGE = 'WRITTING_MESSAGE';
 export const IS_TYPING= 'IS_TYPING';
 
-
-
 export function setIsTyping(from, isTyping ) {
     return {
         type: IS_TYPING,

@@ -2,11 +2,11 @@ import React, {
     Component
 } from 'react'
 import proptypes from 'prop-types'
-import './Chat.scss'
+import './chat.scss'
 
-import Messages from '../Messages/Messages'
-import MessageBox from '../message-box/message-box'
-import TypingMessage from '../typing-message/typing-message'
+import Messages from '../messages/'
+import MessageBox from '../message-box/'
+import TypingMessage from '../typing-message/'
 
 
 const onSubmitMessage = (
