@@ -1,13 +1,13 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
-// export const UPDATE_MESSAGE_FIELD = 'UPDATE_MESSAGE_FIELD';
+export const WRITTING_MESSAGE = 'WRITTING_MESSAGE';
 
-// export function update_message_field(message, userid) {
-    // return {
-        // type: UPDATE_MESSAGE_FIELD,
-        // message,
-        // userid
-    // };
-// }
+export function writtingMessage(message, from) {
+    return {
+        type: WRITTING_MESSAGE,
+        message,
+        from
+    };
+}
 
 export function sendMessage(message, from, to) {
     console.log('ALERT! from: ' + from + ' to: ' + to + 'message: ' + message);

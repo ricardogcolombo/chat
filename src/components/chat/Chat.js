@@ -1,64 +1,79 @@
 import React, {
-    Component
+	Component
 } from 'react'
 
 
 import {
-    connect
+	connect
 } from 'react-redux';
 import {
-    sendMessage
+	sendMessage,
+	writtingMessage
 } from '../../actions/messages'
 import store from '../../store';
 
 import './Chat.scss'
 
-const initialState = {
-    messages: []
-}
 class ChatContainer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = initialState
-    }
-    onSubmitMessage() {
-        store.dispatch(sendMessage(this.value, this.props.from, this.props.to))
-    }
+	state = store.getState()
+	isTyping;
+	value;
+	onSubmitMessage() {
+		// send message via state
+		store.dispatch(sendMessage(this.value, this.props.from, this.props.to))
+	}
+	onChange(event) {
+		const from = this.props.from
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-        this.setState(nextProps.messages)
-    }
-    onChange(event) {
-        this.value = event.target.value;
-    }
-    render() {
-        let chatMessages;
+		this.value = event.target.value
+		// send to the other user the typing flag
+		store.dispatch(writtingMessage(true, from))
 
-        if (this.state) {
-            chatMessages = this.state.messages.map((data, index) => {
-                return (<div key={index}> {data.from +":"+ data.message} </div>)
-            })
-        }
-        return (
-            <div>
+		// if a timeout is set clean it 
+		if (this.isTyping) clearTimeout(this.isTyping)
+
+		// set a timeout to delete the typing message
+		this.isTyping = setTimeout(function() {
+			store.dispatch(writtingMessage(false, from))
+		}, 1000)
+	}
+	render() {
+		let chatMessages, typingMessage;
+		
+		// create divs for messages
+		if (this.props.messages) {
+			chatMessages = this.props.messages.map((data, index) => {
+				return (<div key={index}> {data.from +":"+ data.message} </div>)
+			})
+		}
+		
+		// set typing message with the flag
+		if (!!this.props.value[this.props.to])
+			typingMessage = (<div>{this.props.to} is Typing...</div>)
+
+		return (
+			<div>
                 <div className='chat'>
                     <div className='chat-window'>
                         {chatMessages}
                     </div>
                     <div className='chat-box'>
-                        <input className='message-input' value={this.props.value} onChange={this.onChange.bind(this)} />
+                        {typingMessage}
+                        <input className='message-input' onChange={this.onChange.bind(this)} />
                         <button className='send-button' onClick={this.onSubmitMessage.bind(this)} >send</button>
                     </div>
                 </div>
             </div>
-        )
-    }
+		)
+	}
 }
+
+
 const mapStateToProps = function(state) {
-    return {
-        messages: state
-    }
+	return {
+		messages: state.msg,
+		value: state.value
+	}
 }
 
 export default connect(mapStateToProps)(ChatContainer);

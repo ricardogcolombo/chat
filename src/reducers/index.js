@@ -2,9 +2,11 @@ import {
     combineReducers
 } from 'redux';
 import messagesReducer from './messages'
+import typingReducer from './typing'
 
 const rootReducer = combineReducers({
-    messages: messagesReducer
+    msg: messagesReducer,
+    value:typingReducer
 });
 
 export default rootReducer;
