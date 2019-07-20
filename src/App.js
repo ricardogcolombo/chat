@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import './App.scss';
-import Chat from './components/chat/Chat.js'
+import Chat from './components/chat/'
 class App extends Component {
 
     render() {
@@ -11,11 +11,11 @@ class App extends Component {
             <div className="App">
             <div>
                 Laura
-                <Chat from='laura' to='rob' className='MainChat' />
+                <Chat from='laura' to='rob'  />
             </div>
             <div>
                 Rob
-            <Chat from='rob'  to='laura' className='SecondaryChat'/>
+            <Chat from='rob'  to='laura' />
             </div>
         </div>
         )

@@ -2,13 +2,16 @@ import {
     WRITTING_MESSAGE
 } from '../actions/messages'
 
-const typingReducer = function(state = {
-}, action) {
-    let newST = Object.assign({}, state)
+const typingReducer = function(state = {}, action) {
     switch (action.type) {
         case WRITTING_MESSAGE:
-            newST[action.from] = action.message
-            return newST
+            return {
+                ...state,
+                [action.from]: {
+                    message: action.message,
+                    isTyping: action.isTyping
+                }
+            }
 
         default:
             return state;

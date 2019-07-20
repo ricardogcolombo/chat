@@ -6,7 +6,7 @@ import typingReducer from './typing'
 
 const rootReducer = combineReducers({
     msg: messagesReducer,
-    value:typingReducer
+    currentMessage:typingReducer
 });
 
 export default rootReducer;

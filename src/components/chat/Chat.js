@@ -1,79 +1,65 @@
 import React, {
-	Component
+    Component
 } from 'react'
-
-
-import {
-	connect
-} from 'react-redux';
-import {
-	sendMessage,
-	writtingMessage
-} from '../../actions/messages'
-import store from '../../store';
-
+import proptypes from 'prop-types'
 import './Chat.scss'
 
-class ChatContainer extends Component {
-	state = store.getState()
-	isTyping;
-	value;
-	onSubmitMessage() {
-		// send message via state
-		store.dispatch(sendMessage(this.value, this.props.from, this.props.to))
-	}
-	onChange(event) {
-		const from = this.props.from
+import Messages from '../Messages/Messages'
+import MessageBox from '../message-box/message-box'
+import TypingMessage from '../typing-message/typing-message'
 
-		this.value = event.target.value
-		// send to the other user the typing flag
-		store.dispatch(writtingMessage(true, from))
 
-		// if a timeout is set clean it 
-		if (this.isTyping) clearTimeout(this.isTyping)
+const onSubmitMessage = (
+    sendMessage,
+    currentMessage,
+    from,
+    to,
+    writtingMessage
+) => {
+    sendMessage(currentMessage, from, to)
+    writtingMessage('', from)
+}
 
-		// set a timeout to delete the typing message
-		this.isTyping = setTimeout(function() {
-			store.dispatch(writtingMessage(false, from))
-		}, 1000)
-	}
-	render() {
-		let chatMessages, typingMessage;
-		
-		// create divs for messages
-		if (this.props.messages) {
-			chatMessages = this.props.messages.map((data, index) => {
-				return (<div key={index}> {data.from +":"+ data.message} </div>)
-			})
-		}
-		
-		// set typing message with the flag
-		if (!!this.props.value[this.props.to])
-			typingMessage = (<div>{this.props.to} is Typing...</div>)
+class Chat extends Component {
+    render() {
 
-		return (
-			<div>
+        const {
+            messages,
+            to,
+            // inputValue,
+            currentMessage,
+            from,
+            sendMessage,
+            writtingMessage
+        } = this.props;
+
+
+
+        return (
+            <div>
                 <div className='chat'>
                     <div className='chat-window'>
-                        {chatMessages}
+                        <Messages messages={messages}/>
                     </div>
                     <div className='chat-box'>
-                        {typingMessage}
-                        <input className='message-input' onChange={this.onChange.bind(this)} />
-                        <button className='send-button' onClick={this.onSubmitMessage.bind(this)} >send</button>
+                        <TypingMessage to={to} currentMessage={currentMessage}/>
+                        <MessageBox  writtingMessage={writtingMessage} from={from} />
+                        <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} >send</button>
                     </div>
                 </div>
             </div>
-		)
-	}
+        )
+    }
 }
 
-
-const mapStateToProps = function(state) {
-	return {
-		messages: state.msg,
-		value: state.value
-	}
+Chat.propTypes = {
+    messages: proptypes.array.isRequired,
+    currentMessage: proptypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(ChatContainer);
+Chat.defaultProps = {
+    messages: [],
+    currentMessage: {}
+}
+
+export default Chat;

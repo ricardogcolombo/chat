@@ -1,11 +1,12 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const WRITTING_MESSAGE = 'WRITTING_MESSAGE';
 
-export function writtingMessage(message, from) {
+export function writtingMessage(message, from, isTyping ) {
     return {
         type: WRITTING_MESSAGE,
         message,
-        from
+        from,
+        isTyping
     };
 }
 
