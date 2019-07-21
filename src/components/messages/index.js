@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import './messages.scss';
 
 const Messages = ({
         messages
     }) =>
     messages.map((data, index) =>
-        <div key={index}> {data.from +":"+ data.message} </div>
+        <div className='message-row' key={index}> 
+            <div className='sender-name'>{data.from +":"}</div>
+            <div className='sender-message'> { data.message} </div>
+        </div>
     )
 
 export default Messages

@@ -7,6 +7,7 @@ class MessageBox extends React.Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.isTypingTimeout = null;
     }
 
@@ -29,12 +30,22 @@ class MessageBox extends React.Component {
             setIsTyping(from, false)
         }, 3000)
     }
+
+    handleKeyDown(event) {
+        const {
+            onSubmit
+        } = this.props
+
+        if (event.key === 'Enter') {
+            onSubmit()
+        }
+    }
     render() {
         const {
             inputValue
         } = this.props
 
-        return <input value={inputValue.message} className='message-input' onChange={event=>this.onChange(event)}/>
+        return <input placeholder='Write a message...' value={inputValue.message} className='message-input' onKeyDown={event=>this.handleKeyDown(event)} onChange={event=>this.onChange(event)}/>
     }
 }
 MessageBox.defaultProps = {

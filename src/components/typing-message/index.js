@@ -1,8 +1,10 @@
 import React from 'react'
+import './typing-message.scss'
 
 const TypingMessage = ({
     currentMessage,
     to
-}) => !!(currentMessage[to] && currentMessage[to].isTyping) && <div>{to} is Typing...</div>
+}) => !!(currentMessage[to] && currentMessage[to].isTyping) && <div className='typing-message'>{to} is Typing...</div>
+// }) => <div className='typing-message' >{to} is Typing...</div>
 
 export default TypingMessage

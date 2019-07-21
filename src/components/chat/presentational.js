@@ -37,16 +37,14 @@ class Chat extends Component {
 
 
         return (
-            <div>
-                <div className='chat'>
-                    <div className='chat-window'>
-                        <Messages messages={messages}/>
-                    </div>
-                    <div className='chat-box'>
-                        <TypingMessage to={to} currentMessage={currentMessage}/>
-                        <MessageBox  setIsTyping={setIsTyping} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
-                        <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} >send</button>
-                    </div>
+            <div className='chat'>
+                <div className='chat-window'>
+                    <Messages messages={messages}/>
+                </div>
+                <div className='chat-box'>
+                    <TypingMessage to={to} currentMessage={currentMessage}/>
+                    <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
+                    <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} ></button>
                 </div>
             </div>
         )

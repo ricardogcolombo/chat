@@ -1,0 +1,15 @@
+.message-row{
+    width:100%;
+    .sender-name{
+        color:#4e7ea8;
+        width:100%;
+        margin-right:50px;
+        font:18px/20px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
+    }
+    .sender-message{
+        width:100%;
+        margin-left:10px;
+        float:left;
+        font:12px/18px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
+    }
+}
