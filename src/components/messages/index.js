@@ -8,7 +8,7 @@ const Messages = ({
         <div className='message-row' key={index}> 
             <div className='sender-time'>{data.time}</div>
             <div className='sender-name'>{data.from +":"}</div>
-            <div className='sender-message'> { data.message} </div>
+            <div className='sender-message'>{data.message}</div>
         </div>
     )
 
