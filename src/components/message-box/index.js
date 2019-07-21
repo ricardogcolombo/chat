@@ -2,7 +2,6 @@ import React from 'react'
 import {
     debounce
 } from 'lodash'
-
 class MessageBox extends React.Component {
     constructor(props) {
         super(props);

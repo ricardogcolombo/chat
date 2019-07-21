@@ -18,12 +18,13 @@ export function writtingMessage(message, from ) {
     };
 }
 
-export function sendMessage(message, from, to) {
-    console.log('ALERT! from: ' + from + ' to: ' + to + 'message: ' + message);
+export function sendMessage(message, from, to,time) {
+    console.log(time+' from: ' + from + ' to: ' + to + 'message: ' + message);
     return {
         type: SEND_MESSAGE,
         message,
         from,
-        to
+        to,
+        time
     };
 }

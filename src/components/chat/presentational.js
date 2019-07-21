@@ -3,7 +3,7 @@ import React, {
 } from 'react'
 import proptypes from 'prop-types'
 import './chat.scss'
-
+import moment from 'moment'
 import Messages from '../messages/'
 import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
@@ -14,9 +14,10 @@ const onSubmitMessage = (
     currentMessage,
     from,
     to,
-    writtingMessage
+    writtingMessage,
+    time
 ) => {
-    sendMessage(currentMessage, from, to)
+    sendMessage(currentMessage, from, to, time)
     writtingMessage('', from)
 }
 
@@ -26,15 +27,12 @@ class Chat extends Component {
         const {
             messages,
             to,
-            // inputValue,
             currentMessage,
             from,
             sendMessage,
             writtingMessage,
             setIsTyping
         } = this.props;
-
-
 
         return (
             <div className='chat'>
@@ -43,8 +41,8 @@ class Chat extends Component {
                 </div>
                 <div className='chat-box'>
                     <TypingMessage to={to} currentMessage={currentMessage}/>
-                    <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
-                    <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage)} ></button>
+                    <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm'))} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
+                    <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm'))} ></button>
                 </div>
             </div>
         )
