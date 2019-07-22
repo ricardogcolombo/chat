@@ -36,15 +36,17 @@ class Chat extends Component {
 
         return (
             <div className='chat'>
-                <div className='chat-window'>
-                    <Messages messages={messages}/>
-                </div>
-                <div className='chat-box'>
-                    <TypingMessage to={to} currentMessage={currentMessage}/>
-                    <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm'))} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
-                    <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm'))} ></button>
-                </div>
+                <div className='chat-title'> {from}
+                <TypingMessage to={to} currentMessage={currentMessage}/>
             </div>
+            <div className='chat-window'>
+                <Messages messages={messages} from={from}/>
+            </div>
+            <div className='chat-box'>
+                <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm A'))} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
+                <button className='send-button' onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm A'))} ></button>
+            </div>
+        </div>
         )
     }
 }

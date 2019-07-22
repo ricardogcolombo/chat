@@ -19,7 +19,6 @@ export function writtingMessage(message, from) {
 }
 
 export function sendMessage(message, from, to, time) {
-    console.log(time + ' from: ' + from + ' to: ' + to + 'message: ' + message);
     return {
         type: SEND_MESSAGE,
         message,

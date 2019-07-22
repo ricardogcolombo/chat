@@ -11,9 +11,11 @@ const messagesReducer = function(state = [], action) {
                 message: action.message,
                 time: action.time
             };
-
-            return newST.concat([newMessage])
-
+            if(action.message.length>0){
+                return newST.concat([newMessage])
+            }else{
+                return state
+            }
         default:
             return state;
     }
