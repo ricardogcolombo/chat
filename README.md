@@ -1,4 +1,9 @@
 # Chat
+To Run the project run on your terminal:
+```
+npm install 
+npm start
+```
 
 ## Table of Contents
 
