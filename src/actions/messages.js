@@ -1,8 +1,8 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const WRITTING_MESSAGE = 'WRITTING_MESSAGE';
-export const IS_TYPING= 'IS_TYPING';
+export const IS_TYPING = 'IS_TYPING';
 
-export function setIsTyping(from, isTyping ) {
+export function setIsTyping(from, isTyping) {
     return {
         type: IS_TYPING,
         from,
@@ -10,7 +10,7 @@ export function setIsTyping(from, isTyping ) {
     };
 }
 
-export function writtingMessage(message, from ) {
+export function writtingMessage(message, from) {
     return {
         type: WRITTING_MESSAGE,
         message,
@@ -18,8 +18,8 @@ export function writtingMessage(message, from ) {
     };
 }
 
-export function sendMessage(message, from, to,time) {
-    console.log(time+' from: ' + from + ' to: ' + to + 'message: ' + message);
+export function sendMessage(message, from, to, time) {
+    console.log(time + ' from: ' + from + ' to: ' + to + 'message: ' + message);
     return {
         type: SEND_MESSAGE,
         message,
