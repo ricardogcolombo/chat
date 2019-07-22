@@ -1,23 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 import {
     shallow
-} from 'enzyme';
-
+} from 'enzyme'
 import {
     Provider
-} from 'react-redux';
+} from 'react-redux'
 import store from './store.js'
 
-describe('<App/>', () => {
-        // expect(wrapper.contains('Chat')).toEqual(true)
-    test('create component',()=>{
-        const wrapper = shallow(
+const createOne = (props = {}) => {
+    return shallow(
+        <Provider store={store}>
             <App/>
-        );
+        </Provider>
+    )
+}
 
-        expect(2+2).toEqual(4)
+
+describe('<App/>', () => {
+    let component;
+
+    beforeEach(() => {
+        component = createOne()
+    })
+
+    test('create component', () => {
+        expect(component.length).toEqual(1)
     });
-
 })
