@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-    debounce
-} from 'lodash'
+
 class MessageBox extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +12,6 @@ class MessageBox extends React.Component {
         const {
             writtingMessage,
             from,
-            inputValue,
             setIsTyping
         } = this.props;
 
