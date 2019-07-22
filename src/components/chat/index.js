@@ -9,8 +9,6 @@ import {
     setIsTyping
 } from '../../actions/messages'
 
-import store from '../../store';
-
 const mapStateToProps = function({
     msg,
     currentMessage
