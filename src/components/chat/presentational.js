@@ -22,6 +22,24 @@ const onSubmitMessage = (
 }
 
 class Chat extends Component {
+    constructor(props){
+        super(props)
+        this.messagesEnd = null
+        this.scrollToBottom=this.scrollToBottom.bind(this)
+    }
+    scrollToBottom(){
+        this.messagesEnd.scrollIntoView()
+    }
+    componentDidMount(){
+        if(this.messagesEnd){
+            this.scrollToBottom()
+        }
+    }
+    componentDidUpdate(){
+        if( this.messagesEnd){
+            this.scrollToBottom()
+        }
+    }
     render() {
 
         const {
@@ -41,6 +59,7 @@ class Chat extends Component {
             </div>
             <div className='chat-window'>
                 <Messages messages={messages} from={from}/>
+                <div  style={{ float:"left", clear: "both" }} ref={e=> this.messagesEnd = e}></div>
             </div>
             <div className='chat-box'>
                 <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm A'))} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
