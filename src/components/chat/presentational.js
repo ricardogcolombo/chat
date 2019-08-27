@@ -7,7 +7,7 @@ import moment from 'moment'
 import Messages from '../messages/'
 import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
-
+import styled, { css } from 'styled-components'
 
 const onSubmitMessage = (
     sendMessage,
