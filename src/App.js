@@ -1,21 +1,45 @@
 import React, {
     Component
 } from 'react';
+import styled from 'styled-components'
 
-import './App.scss';
 import Chat from './components/chat/'
-class App extends Component {
+const MainChat= styled.div`
+    float: left;
+    width: 45%;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+    padding-right:35px;
+    margin-right:5px;
+`
+const SecondaryChat= styled.div`
+    padding: 20px;
+    width: 45%;
+    height: 100%;
+    position: relative;
+    float: left;
+`
 
+const AppDiv= styled.div`
+    width: 80%;
+    min-height: 500px;
+    min-width:1060px;
+    overflow:auto;
+    margin: auto;
+    padding: 10px;
+`
+class App extends Component {
     render() {
         return (
-            <div className="App">
-                <div className='MainChat'>
+            <AppDiv >
+                <MainChat>
                     <Chat from='laura' to='rob'  />
-                </div>
-                <div className='SecondaryChat'>
+                </MainChat>
+                <SecondaryChat>
                     <Chat from='rob'  to='laura' />
-                </div>
-            </div>
+                </SecondaryChat>
+            </AppDiv>
         )
     }
 }

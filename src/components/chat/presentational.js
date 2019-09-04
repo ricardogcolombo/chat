@@ -6,7 +6,7 @@ import moment from 'moment'
 import Messages from '../messages/'
 import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const SendButton = styled.button`
     margin-top:10px;
@@ -39,7 +39,16 @@ const ChatApp = styled.div`
     position: relative;
 
 `
-
+const ChatTitle = styled.div`
+    text-align:center;
+    font:22px/18px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
+    color:#FFF;
+    width:100%; 
+    font-weight: bold;
+    background-color:#5682a3;
+    padding-top: 15px;
+    padding-bottom: 25px;
+`
 const onSubmitMessage = (
     sendMessage,
     currentMessage,
@@ -85,9 +94,9 @@ class Chat extends Component {
 
         return (
             <ChatApp>
-                <div className='chat-title'> {from}
-                <TypingMessage to={to} currentMessage={currentMessage}/>
-            </div>
+                <ChatTitle> {from}
+                    <TypingMessage to={to} currentMessage={currentMessage}/>
+                </ChatTitle>
             <ChatWindow>
                 <Messages messages={messages} from={from}/>
                 <div  style={{ float:"left", clear: "both" }} ref={e=> this.messagesEnd = e}></div>

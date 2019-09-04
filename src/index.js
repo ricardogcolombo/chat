@@ -1,7 +1,5 @@
 import React from 'react';
 
-import styled, { css } from 'styled-components'
-
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
