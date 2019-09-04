@@ -1,4 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const MessageInput= styled.input`
+    font-size:13px;
+    outline: none;
+    width: 79%;
+    border: none;
+    margin-right: 5px;
+    font:12px/18px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
+    border-bottom:2px solid #b6d7f4;
+`
+
 
 class MessageBox extends React.Component {
     constructor(props) {
@@ -18,7 +30,7 @@ class MessageBox extends React.Component {
         // send to the other user the typing flag
         writtingMessage(event.target.value, from)
         setIsTyping(from, true)
-        // if a timeout is set clean it 
+        // if a timeout is set clean it
         if (this.isTypingTimeout) clearTimeout(this.isTypingTimeout)
 
         // set a timeout to delete the typing message
@@ -41,7 +53,7 @@ class MessageBox extends React.Component {
             inputValue
         } = this.props
 
-        return <input placeholder='Write a message...' value={inputValue.message} className='message-input' onKeyDown={event=>this.handleKeyDown(event)} onChange={event=>this.onChange(event)}/>
+        return <MessageInput placeholder='Write a message...' value={inputValue.message} className='message-input' onKeyDown={event=>this.handleKeyDown(event)} onChange={event=>this.onChange(event)}/>
     }
 }
 MessageBox.defaultProps = {
