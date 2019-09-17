@@ -1,54 +1,16 @@
 import React, {
-    Component
+    Component,
+    useReducer
 } from 'react'
+
 import proptypes from 'prop-types'
 import moment from 'moment'
 import Messages from '../messages/'
 import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
-import styled from 'styled-components'
 
-const SendButton = styled.button`
-    margin-top:10px;
-    width: 19%;
-    background: url(https://api.iconify.design/fa-regular:paper-plane.svg?color=%23b6d7f4&width=20&height=20) no-repeat center center;
-    vertical-align: -0.125em;
-    height: 36px;
-    border: none;
-    background-color: #4e7ea8;
-`
+import {SendButton,ChatWindow,ChatApp,ChatTitle} from './style.js';
 
-const ChatWindow = styled.div`
-    background:url(/background.jpg?) center center;
-    height: 100%;
-    max-height: 550px;
-    min-height: 550px;
-    overflow: scroll;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    width: 100%;;
-    width: 100%;
-    margin: auto;
-`
-
-const ChatApp = styled.div`
-    padding: 10px;
-    padding-top: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-
-`
-const ChatTitle = styled.div`
-    text-align:center;
-    font:22px/18px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
-    color:#FFF;
-    width:100%; 
-    font-weight: bold;
-    background-color:#5682a3;
-    padding-top: 15px;
-    padding-bottom: 25px;
-`
 const onSubmitMessage = (
     sendMessage,
     currentMessage,
@@ -95,8 +57,8 @@ class Chat extends Component {
         return (
             <ChatApp>
                 <ChatTitle> {from}
-                    <TypingMessage to={to} currentMessage={currentMessage}/>
-                </ChatTitle>
+                <TypingMessage to={to} currentMessage={currentMessage}/>
+            </ChatTitle>
             <ChatWindow>
                 <Messages messages={messages} from={from}/>
                 <div  style={{ float:"left", clear: "both" }} ref={e=> this.messagesEnd = e}></div>
