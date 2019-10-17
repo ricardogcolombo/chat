@@ -1,6 +1,6 @@
-export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const WRITTING_MESSAGE = 'WRITTING_MESSAGE';
 export const IS_TYPING = 'IS_TYPING';
+export const NEW_MESSAGE = 'NEW_MESSAGE';
 
 export function setIsTyping(from, isTyping) {
     return {
@@ -18,12 +18,12 @@ export function writtingMessage(message, from) {
     };
 }
 
-export function sendMessage(message, from, to, time) {
+export function newMessage({message,from,to,time}){
     return {
-        type: SEND_MESSAGE,
+        type: NEW_MESSAGE,
         message,
         from,
         to,
         time
-    };
+    }
 }

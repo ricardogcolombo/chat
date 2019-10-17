@@ -1,64 +1,46 @@
-import React from 'react'
-import styled from 'styled-components'
+import React ,{useState} from 'react'
 
-const MessageInput= styled.input`
-    font-size:13px;
-    outline: none;
-    width: 79%;
-    border: none;
-    margin-right: 5px;
-    font:12px/18px 'Open Sans',"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,Verdana,sans-serif;
-    border-bottom:2px solid #b6d7f4;
-`
+import {MessageInput,SendButton} from './styled.js'
 
+export default function MessageBox(props){
+    const [value,setValue]=useState('')
 
-class MessageBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onChange = this.onChange.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.isTypingTimeout = null;
-    }
-
-    onChange(event) {
+    let isTypingTimeout=null;
+    const onChange=(event) =>{
         const {
             writtingMessage,
             from,
             setIsTyping
-        } = this.props;
+        } = props;
 
         // send to the other user the typing flag
-        writtingMessage(event.target.value, from)
+        setValue(event.target.value)
         setIsTyping(from, true)
         // if a timeout is set clean it
-        if (this.isTypingTimeout) clearTimeout(this.isTypingTimeout)
+        if (isTypingTimeout) clearTimeout(isTypingTimeout)
 
         // set a timeout to delete the typing message
-        this.isTypingTimeout = setTimeout(() => {
+        isTypingTimeout = setTimeout(() => {
             setIsTyping(from, false)
         }, 3000)
     }
 
-    handleKeyDown(event) {
+    const handleKeyDown=(event) =>{
         const {
             onSubmit
-        } = this.props
-
-        if (event.key === 'Enter') {
-            onSubmit()
+        } = props
+        if (event.key === 'Enter' || event.type==='click') {
+            onSubmit(value)
+        }else{
+            setValue(event.target.value)
         }
     }
-    render() {
-        const {
-            inputValue
-        } = this.props
-
-        return <MessageInput placeholder='Write a message...' value={inputValue.message} className='message-input' onKeyDown={event=>this.handleKeyDown(event)} onChange={event=>this.onChange(event)}/>
-    }
+    return <div><MessageInput
+            placeholder='Write a message...'
+            value={value}
+            className='message-input'
+            onKeyDown={event=>handleKeyDown(event)}
+            onChange={event=>onChange(event)}/>
+        <SendButton onClick={(event)=>handleKeyDown(event)} />
+    </div>
 }
-MessageBox.defaultProps = {
-    inputValue: {
-        message: ''
-    }
-}
-export default MessageBox

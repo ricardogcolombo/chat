@@ -1,17 +1,18 @@
 import {
-    SEND_MESSAGE
+    NEW_MESSAGE
 } from '../actions/messages'
 
 const messagesReducer = function(state = [], action) {
     let newST = state.slice(0);
     switch (action.type) {
-        case SEND_MESSAGE:
+        case NEW_MESSAGE:
+            let {from,message,time} = action
             let newMessage = {
-                from: action.from,
-                message: action.message,
-                time: action.time
+                from: from,
+                message: message,
+                time: time
             };
-            if(action.message.length>0){
+            if(message && message.length>0){
                 return newST.concat([newMessage])
             }else{
                 return state

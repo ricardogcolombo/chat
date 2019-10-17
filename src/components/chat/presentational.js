@@ -1,7 +1,4 @@
-import React, {
-    Component,
-    useReducer
-} from 'react'
+import React, {Component} from 'react'
 
 import proptypes from 'prop-types'
 import moment from 'moment'
@@ -10,25 +7,38 @@ import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
 
 import {SendButton,ChatWindow,ChatApp,ChatTitle} from './style.js';
+import io from 'socket.io-client';
+
+
+export const socket = io.connect('http://localhost:8000');
 
 const onSubmitMessage = (
-    sendMessage,
-    currentMessage,
+    message,
     from,
-    to,
-    writtingMessage,
-    time
+    to
 ) => {
-    sendMessage(currentMessage, from, to, time)
-    writtingMessage('', from)
+    let time=moment().format('HH:mm A')
+    socket.emit('NEW_MESSAGE',
+        {
+            message,
+            from,
+            to,
+            time
+        })
 }
+
 
 class Chat extends Component {
     constructor(props){
         super(props)
         this.messagesEnd = null
         this.scrollToBottom=this.scrollToBottom.bind(this)
+        socket.on('UPDATE_MESSAGES', state=>{
+            debugger;
+            this.props.newMessage(state)
+        } );
     }
+
     scrollToBottom(){
         this.messagesEnd.scrollIntoView()
     }
@@ -49,7 +59,6 @@ class Chat extends Component {
             to,
             currentMessage,
             from,
-            sendMessage,
             writtingMessage,
             setIsTyping
         } = this.props;
@@ -63,10 +72,7 @@ class Chat extends Component {
                 <Messages messages={messages} from={from}/>
                 <div  style={{ float:"left", clear: "both" }} ref={e=> this.messagesEnd = e}></div>
             </ChatWindow >
-            <div className='chat-box'>
-                <MessageBox  setIsTyping={setIsTyping} onSubmit={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm A'))} inputValue={currentMessage[from]} writtingMessage={writtingMessage} from={from} />
-                <SendButton onClick={()=>onSubmitMessage(sendMessage,currentMessage[from].message,from,to,writtingMessage,moment().format('HH:mm A'))} />
-            </div>
+            <MessageBox  setIsTyping={setIsTyping} onSubmit={(currentMessage)=>onSubmitMessage(currentMessage,from,to)} from={from} />
         </ChatApp>
         )
     }

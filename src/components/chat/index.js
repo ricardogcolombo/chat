@@ -4,8 +4,8 @@ import {
 import Chat from './presentational'
 
 import {
-    sendMessage,
     writtingMessage,
+    newMessage,
     setIsTyping
 } from '../../actions/messages'
 
@@ -20,7 +20,7 @@ const mapStateToProps = function({
 }
 
 const mapDispatchToProps = {
-    sendMessage,
+    newMessage,
     writtingMessage,
     setIsTyping
 }

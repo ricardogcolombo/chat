@@ -1,15 +1,5 @@
 import styled from 'styled-components'
 
-export const SendButton = styled.button`
-    margin-top:10px;
-    width: 19%;
-    background: url(https://api.iconify.design/fa-regular:paper-plane.svg?color=%23b6d7f4&width=20&height=20) no-repeat center center;
-    vertical-align: -0.125em;
-    height: 36px;
-    border: none;
-    background-color: #4e7ea8;
-`
-
 export const ChatWindow = styled.div`
     background:url(/background.jpg?) center center;
     height: 100%;
