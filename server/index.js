@@ -9,11 +9,12 @@ app.use(cors());
 const NEW_MESSAGE = 'NEW_MESSAGE';
 const UPDATE_MESSAGES = 'UPDATE_MESSAGES';
 
-
+const users = {};
 io.on('connection', client=> {
     console.log('user Connected')
-    client.on('REGISTER',state=>{
-        console.log(state)
+    client.on('REGISTER',userName=>{
+        console.log("User registered "+ userName);
+        users[userName]= {}
     })
 
     client.on(NEW_MESSAGE, state => {

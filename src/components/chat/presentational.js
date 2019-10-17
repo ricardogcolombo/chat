@@ -6,7 +6,7 @@ import Messages from '../messages/'
 import MessageBox from '../message-box/'
 import TypingMessage from '../typing-message/'
 
-import {SendButton,ChatWindow,ChatApp,ChatTitle} from './style.js';
+import {ChatWindow,ChatApp,ChatTitle} from './style.js';
 import io from 'socket.io-client';
 
 
@@ -33,8 +33,8 @@ class Chat extends Component {
         super(props)
         this.messagesEnd = null
         this.scrollToBottom=this.scrollToBottom.bind(this)
+        socket.emit('REGISTER',props.from)
         socket.on('UPDATE_MESSAGES', state=>{
-            debugger;
             this.props.newMessage(state)
         } );
     }
@@ -59,7 +59,6 @@ class Chat extends Component {
             to,
             currentMessage,
             from,
-            writtingMessage,
             setIsTyping
         } = this.props;
 
