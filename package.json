@@ -16,7 +16,7 @@
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.3.2",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "enzyme": "^3.10.0",
